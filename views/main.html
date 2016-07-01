@@ -1,18 +1,15 @@
 <div class="row">
   <div class="col-md-12">
+    <button id="createButton" class="btn btn-info" ng-click="root.showNewArticleWindow = true">+ Create New Button</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
     <div id="articleInputForm" class="row" ng-show="root.showNewArticleWindow">
       <form role="form" ng-submit="add.addArticle()">
         <fieldset class=form-group>
           <input type="text" ng-model="article.title" class="form-control" placeholder="article title" required>
-        </fieldset>
-        <fieldset class=form-group>
-          <input type="text" ng-model="article.author" class="form-control" placeholder="author" required>
-        </fieldset>
-        <fieldset class=form-group>
-          <input type="text" ng-model="article.description" class="form-control" placeholder="article description" required>
-        </fieldset>
-        <fieldset class=form-group>
-          <input type="text" ng-model="article.image" class="form-control" placeholder="image url" required>
         </fieldset>
         <button type="submit" class="btn btn-primary" value="Add">Submit</button>
         <button type="button" class="btn btn-default" ng-click="root.showNewArticleWindow = false">Cancel</button>
@@ -20,78 +17,23 @@
     </div>
   </div>
 </div>
+
 <div class="row">
   <div class="col-md-12">
     <div id="articleRow" class="row" ng-repeat="article in articles | filter:root.article | orderBy: order">
       <div class="posts">
-      <img class="col-md-4" ng-src="{{article.image}}" alt="Post Image Not Available" />
-      <img class="col-md-4" ng-model="articles">
-      <div class="col-md-8">
-        <div class="row">
-          <div id="thumbsToolbar" class="col-md-12">
-            <div class="btn-toolbar" role="toolbar" aria-label="...">
-              <div class="btn-group" role="group">
-                <button type="button" class="btn btn-default buttonOutline" ng-click="upVote(article)">
-                  <span class="glyphicon glyphicon-thumbs-up"></span>
-                </button>
-                <button type="button" class="btn btn-default buttonOutline" ng-click="downVote(article)">
-                  <span class="glyphicon glyphicon-thumbs-down"></span>
-                </button>
-                <button type="button" class="btn btn-default buttonOutline">
-                  <span ng-class="{green: article.rating > 0, red: article.rating < 0}"> {{article.rating}} </span>
-                </button>
-
-              </div>
-            </div>
-          </div>
           <div id="articleText">
-            <div class="col-md-12" ng-model="articles"><strong>Title:</strong> {{article.title}} </div>
-            <div class="col-md-12" ng-model="articles"><strong>Author:</strong> {{article.author}} </div>
-            <div class="col-md-12" ng-model="articles"><strong>Description:</strong> {{article.description}} </div>
-            <div class="col-md-12" ng-model="articles">Published
-              <time am-time-ago="article.date"></time>
-            </div>
+            <div>{{article.title}}</div>
+            <button class="btn btn-success" ng-model="articles" ng-click="upVote(article)"> Do it. </button>
           </div>
+          <!-- <div>{{article.rating}}</div> -->
+          <!-- <div>{{article.date}}</div> -->
+          <div>Last Completed: {{article.comments[article.comments.length-1]}}</div>
+          <div>{{article.comments}}</div>
+          <button type="button" class="btn btn-default buttonOutline pull-right" ng-click="removeArticle(article)">Delete Button</button>
 
-          <div id="commentsToolbar" class="row" role="group">
-            <div class="col-md-6">
-              <button ng-click="article.showCommentWindow = true" type="button" class="btn btn-default buttonOutline">+ Comment</button>
-              <button type="button" class="btn btn-default buttonOutline" ng-click="toggleComments(article)">
-                <span class="glyphicon glyphicon-comment"></span>
-                <ng-pluralize count="article.comments.length"
-                 when="{'0': 'No Comments',
-                     'one': '1 Comment',
-                     'other': '{} Comments'}">
-                </ng-pluralize>
-              </button>
-            </div>
-            <div class="btn-group col-md-6">
-            <div class="btn-group" role="group" style="float: right !important;">
-              <button type="button" class="btn btn-default buttonOutline pull-right" ng-click="removeArticle(article)">Delete Post</button>
-            </div>
-          </div>
-        </div>
-        <div ng-show="article.showCommentWindow" class="col-md-12" ng-model="articles">
-          <form role="form" ng-submit="addComment(article)">
-            <fieldset class="form-group">
-              <input type="text" ng-model="article.newAuthor" class="form-control" placeholder="author name" required>
-            </fieldset>
-            <fieldset class="form-group">
-              <input type="text" ng-model="article.newComment" class="form-control" placeholder="comment here..." required>
-            </fieldset>
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <button type="button" class="btn btn-default" ng-click="article.showCommentWindow = false">Cancel</button>
-          </form>
-        </div>
-          <div ng-show="article.showCommentList" ng-repeat="comment in article.comments">
-            <div class="col-md-12" ng-model="articles"> <strong> {{comment.newAuthor}} </strong></div>
-            <div class="col-md-12" ng-model="articles"> {{comment.newComment}} </div>
-            <div class="col-md-12" ng-model="articles">
-              <time am-time-ago="comment.newCommentDate"></time>
-            </div>
-          </div>
-        </div>
-      </div>
+
+
     </div>
   </div>
   </div>
