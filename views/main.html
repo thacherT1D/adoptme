@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-    <button id="createButton" class="btn btn-info" ng-click="root.showNewArticleWindow = true">+ Create New Button</button>
+    <button class="btn btn-block btn-primary buttonOutline" ng-click="root.showNewArticleWindow = true">+ Create New Button</button>
   </div>
 </div>
 
@@ -9,10 +9,13 @@
     <div id="articleInputForm" class="row" ng-show="root.showNewArticleWindow">
       <form role="form" ng-submit="add.addArticle()">
         <fieldset class=form-group>
-          <input type="text" ng-model="article.title" class="form-control" placeholder="article title" required>
+          <input type="text" ng-model="article.title" class="form-control" placeholder="Task Name" required>
         </fieldset>
-        <button type="submit" class="btn btn-primary" value="Add">Submit</button>
-        <button type="button" class="btn btn-default" ng-click="root.showNewArticleWindow = false">Cancel</button>
+        <fieldset class=form-group>
+          <input type="text" ng-model="article.description" class="form-control" placeholder="Task Notes or Description">
+        </fieldset>
+        <button type="submit" class="btn btn-primary pull-right buttonOutline" value="Add">Submit</button>
+        <button type="button" class="btn btn-default pull-right buttonOutline" ng-click="root.showNewArticleWindow = false">Cancel</button>
       </form>
     </div>
   </div>
@@ -23,18 +26,30 @@
     <div id="articleRow" class="row" ng-repeat="article in articles | filter:root.article | orderBy: order">
       <div class="posts">
           <div id="articleText">
-            <div>{{article.title}}</div>
-            <button class="btn btn-success" ng-model="articles" ng-click="upVote(article)"> Do it. </button>
+            <div><strong>{{article.title}}</strong></div>
+            <button class="btn btn-block btn-success buttonOutline" ng-model="articles" ng-click="upVote(article)"> Do it. </button>
           </div>
           <!-- <div>{{article.rating}}</div> -->
           <!-- <div>{{article.date}}</div> -->
-          <div>Last Completed: {{article.comments[article.comments.length-1]}}</div>
-          <div>{{article.comments}}</div>
-          <button type="button" class="btn btn-default buttonOutline pull-right" ng-click="removeArticle(article)">Delete Button</button>
+          <div>Last Completed <time am-time-ago="article.date"></time></div>
+          <div>{{article.description}}</div>
+          <!-- <div>{{article.date}}</div> -->
+          <!-- <div>Last Completed: {{article.comments[article.comments.length-1]}}</div> -->
+          <!-- <div>{{article.comments}}</div> -->
 
+          <div class="btn-group btn-toolbar">
+            <button type="button" class="btn btn-default buttonOutline" ng-click="">Show Data X</button>
+            <button type="button" class="btn btn-default buttonOutline" ng-click="">Edit Button X</button>
+            <button type="button" class="btn btn-default buttonOutline" ng-click="removeArticle(article)">Delete Button</button>
+          </div>
 
+          <div><strong>Task History</strong>
+            <div ng-repeat="comment in article.comments">
+              <time am-time-ago="comment"></time>
+            </div>
+          </div>
 
-    </div>
-  </div>
+        </div>
+      </div>
   </div>
 </div>

@@ -43,6 +43,7 @@ body {
 
 .buttonOutline {
   border: solid 1px #2C3E58;
+  margin: 5px;
 
 }
 .col-md-6 {
