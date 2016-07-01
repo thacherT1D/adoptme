@@ -25,31 +25,50 @@
   <div class="col-md-12">
     <div id="articleRow" class="row" ng-repeat="article in articles | filter:root.article | orderBy: order">
       <div class="posts">
-          <div id="articleText">
-            <div><strong>{{article.title}}</strong></div>
-            <button class="btn btn-block btn-success buttonOutline" ng-model="articles" ng-click="upVote(article)"> Do it. </button>
-          </div>
-          <!-- <div>{{article.rating}}</div> -->
-          <!-- <div>{{article.date}}</div> -->
-          <div>Last Completed <time am-time-ago="article.date"></time></div>
-          <div>{{article.description}}</div>
-          <!-- <div>{{article.date}}</div> -->
-          <!-- <div>Last Completed: {{article.comments[article.comments.length-1]}}</div> -->
-          <!-- <div>{{article.comments}}</div> -->
+        <div id="articleText">
+          <div><strong>{{article.title}}</strong></div>
+          <button class="btn btn-block btn-success buttonOutline" ng-model="articles" ng-click="upVote(article)"> Do it. </button>
+        </div>
+        <!-- <div>{{article.rating}}</div> -->
+        <!-- <div>{{article.date}}</div> -->
 
-          <div class="btn-group btn-toolbar">
-            <button type="button" class="btn btn-default buttonOutline" ng-click="">Show Data X</button>
-            <button type="button" class="btn btn-default buttonOutline" ng-click="">Edit Button X</button>
-            <button type="button" class="btn btn-default buttonOutline" ng-click="removeArticle(article)">Delete Button</button>
-          </div>
 
-          <div><strong>Task History</strong>
-            <div ng-repeat="comment in article.comments">
-              <time am-time-ago="comment"></time>
-            </div>
-          </div>
 
+        <div ng-show="article.comments.length">
+          Last Completed <time am-time-ago="article.date"></time>
+        </div>
+        <div ng-show="article.description.length">
+          <strong>Task Notes: </strong>{{article.description}}
+        </div>
+
+        <!-- <div>{{article.date}}</div> -->
+        <!-- <div>Last Completed: {{article.comments[article.comments.length-1]}}</div> -->
+        <div>{{article.comments}}</div>
+
+        <div class="btn-group btn-toolbar">
+          <button type="button" class="btn btn-default buttonOutline" ng-click="">Edit Button X</button>
+
+          <button ng-show="article.comments.length" type="button" class="btn btn-default buttonOutline" ng-click="toggleComments(article)">
+              Show History
+          </button>
+
+          <button type="button" class="btn btn-default buttonOutline" ng-click="removeArticle(article)">Delete Button</button>
+        </div>
+
+
+      <div ng-hide="article.comments.length">
+        No Events Yet!
+      </div>
+      <div ng-show="article.showCommentList">
+        <div>
+          <strong>Event History</strong>
+        </div>
+        <div ng-repeat="comment in article.comments">
+          <time am-time-ago="comment"></time>
         </div>
       </div>
+
+    </div>
   </div>
+</div>
 </div>

@@ -9,7 +9,7 @@ angular.module('redditCloneApp')
         rating: 0,
         description: 'Should last 7+ days',
         date: "2016-05-06T22:27:48.035Z",
-        comments: ["2016-05-06T22:27:48.035Z"]
+        comments: ["2016-05-16T22:27:48.035Z", "2016-05-06T22:27:48.035Z"]
       },
     ];
 
