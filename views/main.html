@@ -4,6 +4,8 @@
   </div>
 </div>
 
+
+
 <div class="row">
   <div class="col-md-12">
     <div id="articleInputForm" class="row" ng-show="root.showNewArticleWindow">
@@ -43,13 +45,13 @@
 
         <!-- <div>{{article.date}}</div> -->
         <!-- <div>Last Completed: {{article.comments[article.comments.length-1]}}</div> -->
-        <div>{{article.comments}}</div>
+        <!-- <div>{{article.comments}}</div> -->
 
-        <div class="btn-group btn-toolbar">
+        <div>
           <button type="button" class="btn btn-default buttonOutline" ng-click="">Edit Button X</button>
 
           <button ng-show="article.comments.length" type="button" class="btn btn-default buttonOutline" ng-click="toggleComments(article)">
-              Show History
+              Show/Hide History
           </button>
 
           <button type="button" class="btn btn-default buttonOutline" ng-click="removeArticle(article)">Delete Button</button>
@@ -64,11 +66,26 @@
           <strong>Event History</strong>
         </div>
         <div ng-repeat="comment in article.comments">
+          <!-- <button>{{comment}}</button> -->
+          <!-- <button class="btn btn-primary" ng-click="removeInstance(article)">
+          </button> -->
           <time am-time-ago="comment"></time>
         </div>
       </div>
 
     </div>
+
+    <form role="form" ng-submit="add.addArticle()">
+      <fieldset class=form-group>
+        <input type="text" ng-model="article.title" class="form-control" placeholder="article.title" required>
+      </fieldset>
+      <fieldset class=form-group>
+        <input type="text" ng-model="article.description" class="form-control" placeholder="article.description">
+      </fieldset>
+      <button type="submit" class="btn btn-primary pull-right buttonOutline" value="Add">Submit</button>
+      <button type="button" class="btn btn-default pull-right buttonOutline" ng-click="root.showNewArticleWindow = false">Cancel</button>
+    </form>
+
   </div>
 </div>
 </div>
