@@ -15,14 +15,14 @@ MainCtrl($scope, $rootScope) {
     $scope.articles = [
       {
         title: 'Change Dexcom Sensor',
-        rating: 0,
+        // rating: 0,
         description: 'Should last 7+ days',
         date: "2016-05-06T22:27:48.035Z",
         comments: ["2016-05-16T22:27:48.035Z", "2016-05-06T22:27:48.035Z"]
       },
       {
         title: 'Change OmniPod Pod',
-        rating: 0,
+        // rating: 0,
         description: 'Should last 3 days, can stretch an additional 8 hrs',
         date: "2016-05-06T22:27:48.035Z",
         comments: ["2016-05-16T22:27:48.035Z", "2016-05-06T22:27:48.035Z"]
@@ -32,7 +32,7 @@ MainCtrl($scope, $rootScope) {
     $scope.add.addArticle = function () {
       $scope.articles.push({
         title: $scope.article.title,
-        rating: 0,
+        // rating: 0,
         description: $scope.article.description,
         date: 0,
         comments: []
@@ -43,7 +43,7 @@ MainCtrl($scope, $rootScope) {
     };
 
     $scope.upVote = function(article) {
-      article.rating += 1;
+      // article.rating += 1;
       // article.comments.push(new Date);
       article.comments.splice(0,0,new Date);
       article.date = new Date;
